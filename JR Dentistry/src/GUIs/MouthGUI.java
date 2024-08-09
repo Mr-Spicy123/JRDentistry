@@ -68,21 +68,21 @@ public class MouthGUI implements MouseMotionListener {
     layeredFrame.setPreferredSize(new Dimension(1920, 1080));
     layeredFrame.addMouseMotionListener(this);
 
-    ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\e.png"), 1920, 1080);
+    ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/e.png"), 1920, 1080);
     JLabel mouthLabel = new JLabel(mouthImage);
     mouthLabel.setBounds(0, 0, 1920 ,1080);
     layeredFrame.add(mouthLabel, JLayeredPane.DEFAULT_LAYER);
 
-    ImageIcon toolImage = ImageIconScaler.scaleImageIcon(new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\DentalTool.png"), 300, 300);
+    ImageIcon toolImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/DentalTool.png"), 300, 300);
     toolLabel = new JLabel(toolImage);
     toolLabel.setBounds(1600, 400, 300, 300);
     t = new Tool(1600, 400, 300, 300);
     layeredFrame.add(toolLabel, JLayeredPane.PALETTE_LAYER);
 
-    ImageIcon plaqueImage1 = new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\plaque1.png");
-    ImageIcon plaqueImage2 = new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\plaque2.png");
-    ImageIcon plaqueImage3 = new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\plaque3.png");
-    ImageIcon plaqueImage4 = new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\plaque4.png");
+    ImageIcon plaqueImage1 = new ImageIcon("JR Dentistry/out/Images/plaque1.png");
+    ImageIcon plaqueImage2 = new ImageIcon("JR Dentistry/out/Images/plaque2.png");
+    ImageIcon plaqueImage3 = new ImageIcon("JR Dentistry/out/Images/plaque3.png");
+    ImageIcon plaqueImage4 = new ImageIcon("JR Dentistry/out/Images/plaque4.png");
 
     ImageIcon[] plaqueImagesArr = {plaqueImage1, plaqueImage2, plaqueImage3, plaqueImage4};
 

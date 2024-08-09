@@ -11,7 +11,7 @@ public class MenuGUI {
     frame.setLayout(null);
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setBounds(0, 0, 1920, 1080);
-    ImageIcon backgroundImage = ImageIconScaler.scaleImageIcon(new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\menu.png"), 1920, 1080);
+    ImageIcon backgroundImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/menu.png"), 1920, 1080);
     JLabel backgroundLabel = new JLabel(backgroundImage);
     backgroundLabel.setBounds(0, 0, 1920, 1080);
     JLayeredPane panel = new JLayeredPane();

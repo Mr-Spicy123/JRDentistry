@@ -24,7 +24,7 @@ public class StarAnimation extends Thread{
     int height = label.getHeight();
     int x = label.getX();
     int y = label.getY();
-    ImageIcon temp = new ImageIcon("C:\\Users\\jacks\\OneDrive\\JR Dentistry\\star.png");
+    ImageIcon temp = new ImageIcon("JR Dentistry/out/Images/star.png");
     ImageIcon starImage = ImageIconScaler.scaleImageIcon(temp, 1, 1);
     JLabel starLabel = new JLabel(starImage);
     starLabel.setBounds(x, y, width, height);

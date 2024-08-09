@@ -78,24 +78,11 @@ public class MouthGUI implements MouseMotionListener {
   static JLayeredPane layeredFrame;
 
   public MouthGUI() {
-
-    System.out.println("width scale: " + widthScale);
-    System.out.println("height scale: " + heightScale);
-    System.out.println("screen width: " + ScreenInfo.screenWidth);
-    System.out.println("screen height: " + ScreenInfo.screenHeight);
-    System.out.println("original width: " + originalWidth);
-    System.out.println("original height: " + originalHeight);
     for (int i = 0; i < teethPlacement.length; i++) {
       teethPlacement[i][0] = (int) (teethPlacement[i][0] * widthScale);
       teethPlacement[i][1] = (int) (teethPlacement[i][1] * heightScale);
       teethPlacement[i][2] = (int) (teethPlacement[i][2] * widthScale);
       teethPlacement[i][3] = (int) (teethPlacement[i][3] * heightScale);
-    }
-
-    for (int i = 0; i < teethPlacement.length; i++) {
-      for (int j = 0; j < teethPlacement[0].length; j++) {
-        System.out.println(teethPlacement[i][j]);
-      }
     }
 
     mainFrame = new JFrame("Jr. Dentistry");

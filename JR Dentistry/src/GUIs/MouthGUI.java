@@ -69,15 +69,17 @@ public class MouthGUI implements MouseMotionListener {
   static Plaque[] plaqueArr = new Plaque[maxTeeth];
   static int plaqueArrIndex = 0;
 
-  static JFrame mainFrame;
+  static JFrame mainFrame = new JFrame();
 
-  static Tool t;
+  static Tool t = new Tool();
 
-  static JLabel toolLabel;
+  static JLabel toolLabel = new JLabel();
 
-  static JLayeredPane layeredFrame;
+  static JLayeredPane layeredFrame = new JLayeredPane();
 
   public MouthGUI() {
+    initialize();
+    System.out.println("in MouthGUI, variables initialized");
     for (int i = 0; i < teethPlacement.length; i++) {
       teethPlacement[i][0] = (int) (teethPlacement[i][0] * widthScale);
       teethPlacement[i][1] = (int) (teethPlacement[i][1] * heightScale);
@@ -96,7 +98,7 @@ public class MouthGUI implements MouseMotionListener {
 
     ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/e.png"), scrWid, scrHgt);
     JLabel mouthLabel = new JLabel(mouthImage);
-    mouthLabel.setBounds(0, 0, scrWid ,scrHgt);
+    mouthLabel.setBounds(0, 0, scrWid, scrHgt);
     layeredFrame.add(mouthLabel, JLayeredPane.DEFAULT_LAYER);
 
     ImageIcon toolImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/DentalTool.png"), 300, 300);
@@ -134,6 +136,9 @@ public class MouthGUI implements MouseMotionListener {
     mainFrame.setContentPane(layeredFrame);
 
     mainFrame.setVisible(true);
+    mainFrame.revalidate();
+    mainFrame.repaint();
+    System.out.println("frame is now visible");
     boolean run = true;
     runGame(run, t);
   }
@@ -151,15 +156,29 @@ public class MouthGUI implements MouseMotionListener {
   }
 
   public static void runGame(boolean run, Tool t) {
-    if (run) {
+    System.out.println("in run game method");
+    while (run) {
+      System.out.println("game is running");
       delay(1);
       detect(t);
       if (gameOver()) {
         run = false;
-        mainFrame.setVisible(false);
+        plaqueArrIndex = 0;
+        new CompleteGUI();
+        mainFrame.dispose();
       }
-      runGame(run, t);
     }
+    System.out.println("run boolean is false");
+  }
+
+  public static void initialize() {
+    numTeeth = rand.nextInt(minTeeth, maxTeeth+1);
+    plaqueArr = new Plaque[maxTeeth];
+    plaqueArrIndex = 0;
+    mainFrame = new JFrame();
+    layeredFrame = new JLayeredPane();
+    t = new Tool();
+    toolLabel = new JLabel();
   }
 
   public static void delay(int mills) {

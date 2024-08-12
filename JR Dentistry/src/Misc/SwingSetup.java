@@ -41,8 +41,31 @@ public class SwingSetup {
     }
   }
 
+  public static void setupPanel(JLayeredPane panel, int x, int y, int width, int height, Object layout, boolean opaque) {
+    panel.setBounds(x, y, width, height);
+    panel.setOpaque(opaque);
+    if (layout == null) {
+      panel.setLayout(null);
+    }
+    else if (layout instanceof LayoutManager) {
+      LayoutManager l = (LayoutManager) layout;
+      panel.setLayout(l);
+    }
+    else {
+      System.err.println("not a layout");
+    }
+  }
+
   public static void setupButton(JButton button, JPanel panel, ActionListener listener, int x, int y, int width, int height, boolean opaque, boolean focusable) {
     panel.add(button);
+    button.setBounds(x, y, width, height);
+    button.setOpaque(opaque);
+    button.setFocusable(focusable);
+    button.addActionListener(listener);
+  }
+
+  public static void setupButton(JButton button, JLayeredPane panel, ActionListener listener, int x, int y, int width, int height, boolean opaque, boolean focusable) {
+    panel.add(button, JLayeredPane.PALETTE_LAYER);
     button.setBounds(x, y, width, height);
     button.setOpaque(opaque);
     button.setFocusable(focusable);
@@ -57,6 +80,18 @@ public class SwingSetup {
     button.setContentAreaFilled(false);
     button.setForeground(new Color(0, 0, 0, 0));
     panel.add(button);
+    button.setBounds(x, y, width, height);
+    button.addActionListener(listener);
+  }
+
+  public static void setupInvisibleButton(JButton button, JLayeredPane panel, ActionListener listener, int x, int y, int width, int height, boolean opaque, boolean focusable) {
+    button.setOpaque(opaque);
+    button.setFocusable(focusable);
+    button.setOpaque(false);
+    button.setBorder(null);
+    button.setContentAreaFilled(false);
+    button.setForeground(new Color(0, 0, 0, 0));
+    panel.add(button, JLayeredPane.PALETTE_LAYER);
     button.setBounds(x, y, width, height);
     button.addActionListener(listener);
   }

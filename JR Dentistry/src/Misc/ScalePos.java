@@ -2,8 +2,8 @@ package Misc;
 
 public class ScalePos {
     //original width and height of screen
-    static int originalScreenWidth = 1280;
-    static int originalScreenHeight = 720;
+    static int originalScreenWidth = 1920;
+    static int originalScreenHeight = 1080;
 
     //width and height of screen in use
     static int currentScreenWidth = ScreenInfo.screenWidth;
@@ -15,10 +15,10 @@ public class ScalePos {
     static double heightScale = (double) currentScreenHeight / originalScreenHeight;
 
     public static int scaleWidth(int width) {
-        return (int) widthScale * width;
+        return (int) (widthScale * width);
     }
 
     public static int scaleHeight(int height) {
-        return (int) heightScale * height;
+        return (int) (heightScale * height);
     }
 }

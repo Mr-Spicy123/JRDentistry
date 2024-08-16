@@ -1,5 +1,6 @@
 package GUIs;
 
+import Begin.Begin;
 import Misc.ImageIconScaler;
 import Misc.ScalePos;
 import Misc.ScreenInfo;
@@ -11,9 +12,9 @@ import java.awt.event.ActionListener;
 
 public class CompleteGUI {
 
-    ActionListener listener;
+    static ActionListener listener;
 
-    JFrame frame = new JFrame();
+    static JFrame frame = new JFrame("complete GUI");
 
     public CompleteGUI() {
         this.frame = frame;
@@ -46,11 +47,11 @@ public class CompleteGUI {
         panel.add(bgLabel, JLayeredPane.DEFAULT_LAYER);
 
         JButton rerunButton = new JButton("rerun");
-        SwingSetup.setupInvisibleButton(rerunButton, panel, listener, ScalePos.scaleWidth(575), ScalePos.scaleHeight(260), ScalePos.scaleWidth(130), ScalePos.scaleHeight(125), false, false);
-        frame.setVisible(true);
+        SwingSetup.setupInvisibleButton(rerunButton, panel, listener, ScalePos.scaleWidth(865), ScalePos.scaleHeight(400), ScalePos.scaleWidth(175), ScalePos.scaleHeight(175), false, false);
 
         JButton exitButton = new JButton("exit");
-        SwingSetup.setupInvisibleButton(exitButton, panel, listener, ScalePos.scaleWidth(575), ScalePos.scaleHeight(480), ScalePos.scaleWidth(140), ScalePos.scaleHeight(125), false, false);
+        SwingSetup.setupInvisibleButton(exitButton, panel, listener, ScalePos.scaleWidth(865), ScalePos.scaleHeight(730), ScalePos.scaleWidth(200), ScalePos.scaleHeight(185), false, false);
+
         frame.setVisible(true);
 
     }

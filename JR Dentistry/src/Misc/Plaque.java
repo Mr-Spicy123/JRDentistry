@@ -29,6 +29,7 @@ public class Plaque {
   public void Collide(JLayeredPane pane) {
     if (!inProg && alive) {
       new ElimAnimation(this, label, pane);
+
       //pane.remove(label);
     }
   }

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JRDentistry:jar">
+    <output-path>$USER_HOME$/Downloads</output-path>
+    <root id="archive" name="JRDentistry.jar">
+      <element id="module-output" name="JRDentistry" />
+    </root>
+  </artifact>
+</component>

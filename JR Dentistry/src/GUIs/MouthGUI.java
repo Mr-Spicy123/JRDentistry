@@ -1,11 +1,17 @@
 package GUIs;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import Misc.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -43,13 +49,14 @@ public class MouthGUI implements MouseMotionListener {
   };
 
   //instance variables
-  final ImageIcon plaqueImage1 = new ImageIcon("JR Dentistry/out/Images/plaque1.png");
-  final ImageIcon plaqueImage2 = new ImageIcon("JR Dentistry/out/Images/plaque2.png");
-  final ImageIcon plaqueImage3 = new ImageIcon("JR Dentistry/out/Images/plaque3.png");
-  final ImageIcon plaqueImage4 = new ImageIcon("JR Dentistry/out/Images/plaque4.png");
+  //final ImageIcon plaqueImage1 = new ImageIcon("JR Dentistry/out/Images/plaque1.png");
+  final ImageIcon plaqueImage1 = ImageGetter.getImage("plaque1.png");
+  final ImageIcon plaqueImage2 = ImageGetter.getImage("plaque2.png");
+  final ImageIcon plaqueImage3 = ImageGetter.getImage("plaque3.png");
+  final ImageIcon plaqueImage4 = ImageGetter.getImage("plaque4.png");
   final ImageIcon[] plaqueImagesArr = {plaqueImage1, plaqueImage2, plaqueImage3, plaqueImage4};
-  final ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/e.png"), ScreenInfo.screenWidth, ScreenInfo.screenHeight);
-  final ImageIcon toolImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/DentalTool.png"), 300, 300);
+  final ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(ImageGetter.getImage("e.png"), ScreenInfo.screenWidth, ScreenInfo.screenHeight);
+  final ImageIcon toolImage = ImageIconScaler.scaleImageIcon(ImageGetter.getImage("DentalTool.png"), 300, 300);
   int numTeeth;
   JFrame mainFrame;
   Plaque[] plaqueArr;
@@ -206,6 +213,9 @@ public class MouthGUI implements MouseMotionListener {
     delay(1000);
     return true;
   }
+
+
+
 }
 
 //TO DO LIST:

@@ -12,19 +12,10 @@ import java.util.Random;
 public class MouthGUI implements MouseMotionListener {
 
   //static variables
-
-  static ImageIcon plaqueImage1 = new ImageIcon("JR Dentistry/out/Images/plaque1.png");
-  static ImageIcon plaqueImage2 = new ImageIcon("JR Dentistry/out/Images/plaque2.png");
-  static ImageIcon plaqueImage3 = new ImageIcon("JR Dentistry/out/Images/plaque3.png");
-  static ImageIcon plaqueImage4 = new ImageIcon("JR Dentistry/out/Images/plaque4.png");
-  static ImageIcon[] plaqueImagesArr = {plaqueImage1, plaqueImage2, plaqueImage3, plaqueImage4};
-  static ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/e.png"), ScreenInfo.screenWidth, ScreenInfo.screenHeight);
-  static JLabel mouthLabel = new JLabel(mouthImage);
-  static ImageIcon toolImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/DentalTool.png"), 300, 300);
-  static Random rand = new Random();
-  static int minTeeth = 3;
-  static int maxTeeth = 15;
-  static int[][] teethPlacement = {
+  final Random rand = new Random();
+  final int minTeeth = 3;
+  final int maxTeeth = 15;
+  final int[][] teethPlacement = {
           {ScalePos.scaleWidth(390), ScalePos.scaleHeight(230), ScalePos.scaleWidth(50), ScalePos.scaleHeight(50)},   // x, y, width, height 1st tooth
           {ScalePos.scaleWidth(445), ScalePos.scaleHeight(220), ScalePos.scaleWidth(50), ScalePos.scaleHeight(50)},   // x, y, width, height 2nd tooth
           {ScalePos.scaleWidth(490), ScalePos.scaleHeight(175), ScalePos.scaleWidth(130), ScalePos.scaleHeight(130)},  // x, y, width, height 3rd tooth
@@ -52,7 +43,13 @@ public class MouthGUI implements MouseMotionListener {
   };
 
   //instance variables
-
+  final ImageIcon plaqueImage1 = new ImageIcon("JR Dentistry/out/Images/plaque1.png");
+  final ImageIcon plaqueImage2 = new ImageIcon("JR Dentistry/out/Images/plaque2.png");
+  final ImageIcon plaqueImage3 = new ImageIcon("JR Dentistry/out/Images/plaque3.png");
+  final ImageIcon plaqueImage4 = new ImageIcon("JR Dentistry/out/Images/plaque4.png");
+  final ImageIcon[] plaqueImagesArr = {plaqueImage1, plaqueImage2, plaqueImage3, plaqueImage4};
+  final ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/e.png"), ScreenInfo.screenWidth, ScreenInfo.screenHeight);
+  final ImageIcon toolImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/DentalTool.png"), 300, 300);
   int numTeeth;
   JFrame mainFrame;
   Plaque[] plaqueArr;
@@ -63,36 +60,37 @@ public class MouthGUI implements MouseMotionListener {
   int[] usedTeeth;
   int indexUsedTeeth;
   MouseMotionListener listener;
+  JLabel mouthLabel;
 
   public MouthGUI() {
-    initialize();
+    initializeGameVariables();
+    initializeGUI();
+    mainFrame.setVisible(true);
     mainFrame.revalidate();
     mainFrame.repaint();
-    layeredFrame.revalidate();
     layeredFrame.repaint();
+    layeredFrame.revalidate();
     System.out.println("in MouthGUI, variables initialized");
+      for (int i = 0; i < numTeeth; i++) {
+        int tooth = rand.nextInt(0, 24);
+        indexUsedTeeth++;
+        tooth = toothCheck(tooth, usedTeeth);
+        JLabel plaqueLabel;
+        usedTeeth[indexUsedTeeth] = tooth;
+        int image = rand.nextInt(0, 4);
+        ImageIcon plaqueImage = ImageIconScaler.scaleImageIcon(plaqueImagesArr[image], teethPlacement[tooth][2], teethPlacement[tooth][3]);
+        plaqueLabel = new JLabel(plaqueImage);
+        plaqueLabel.setBounds(teethPlacement[tooth][0], teethPlacement[tooth][1], teethPlacement[tooth][2], teethPlacement[tooth][3]);
+        layeredFrame.add(plaqueLabel, JLayeredPane.PALETTE_LAYER);
+        createPlaque(tooth, plaqueLabel);
+      }
 
-    for (int i = 0; i < numTeeth; i++) {
-      int tooth = rand.nextInt(0, 24);
-      indexUsedTeeth++;
-      tooth = toothCheck(tooth, usedTeeth);
-      JLabel plaqueLabel;
-      usedTeeth[indexUsedTeeth] = tooth;
-      int image = rand.nextInt(0, 4);
-      ImageIcon plaqueImage = ImageIconScaler.scaleImageIcon(plaqueImagesArr[image], teethPlacement[tooth][2], teethPlacement[tooth][3]);
-      plaqueLabel = new JLabel(plaqueImage);
-      plaqueLabel.setBounds(teethPlacement[tooth][0], teethPlacement[tooth][1], teethPlacement[tooth][2], teethPlacement[tooth][3]);
-      layeredFrame.add(plaqueLabel, JLayeredPane.PALETTE_LAYER);
-      createPlaque(tooth, plaqueLabel);
-    }
-
-    System.out.println("frame is now visible");
     boolean run = true;
     runGame(run, t);
   }
 
 
-  public static int toothCheck(int tooth, int[] teethArray) {
+  public int toothCheck(int tooth, int[] teethArray) {
     for (int i = 0; i < teethArray.length; i++) {
       if (tooth == teethArray[i]) {
         tooth = rand.nextInt(0, 24);
@@ -104,43 +102,47 @@ public class MouthGUI implements MouseMotionListener {
   }
 
   public void runGame(boolean run, Tool t) {
-    System.out.println("in run game method");
+    System.out.println("in runGame method");
     while (run) {
-      System.out.println("game is running");
-      delay(1);
+      delay(20);
       detect(t);
       if (gameOver()) {
         run = false;
-        layeredFrame.removeMouseMotionListener(listener);
-        new CompleteGUI();
-        mainFrame.dispose();
+        mainFrame.setVisible(false);
+        System.exit(0);
       }
     }
     System.out.println("run boolean is false");
   }
 
-  public void initialize() {
-    usedTeeth = new int[24];
-    Arrays.fill(usedTeeth, -1);
-    indexUsedTeeth = -1;
+  public void initializeGameVariables() {
+    t = new Tool(1600, 400, 300, 300);
+    toolLabel = new JLabel(toolImage);
+    toolLabel.setBounds(1600, 400, 300, 300);
 
-    mainFrame = new JFrame("Game Frame");
+    mainFrame = new JFrame("gameFrame");
     SwingSetup.setupFrame(mainFrame, 0, 0, ScreenInfo.screenWidth, ScreenInfo.screenHeight, false, null);
 
     layeredFrame = new JLayeredPane();
     layeredFrame.setPreferredSize(new Dimension(ScreenInfo.screenWidth, ScreenInfo.screenHeight));
-    layeredFrame.addMouseMotionListener(this);
-    listener = layeredFrame.getMouseMotionListeners()[0];
+
+    usedTeeth = new int[24];
+    Arrays.fill(usedTeeth, -1);
+    indexUsedTeeth = -1;
 
     numTeeth = rand.nextInt(minTeeth, maxTeeth+1);
     plaqueArr = new Plaque[maxTeeth];
     plaqueArrIndex = 0;
 
-    t = new Tool(1600, 400, 300, 300);
-    toolLabel = new JLabel(toolImage);
-    toolLabel.setBounds(1600, 400, 300, 300);
+  }
+
+  public void initializeGUI() {
+    layeredFrame.addMouseMotionListener(this);
+    listener = layeredFrame.getMouseMotionListeners()[0];
+
     layeredFrame.add(toolLabel, JLayeredPane.PALETTE_LAYER);
 
+    mouthLabel = new JLabel(mouthImage);
     mouthLabel.setBounds(0, 0, ScreenInfo.screenWidth, ScreenInfo.screenHeight);
     layeredFrame.add(mouthLabel, JLayeredPane.DEFAULT_LAYER);
 

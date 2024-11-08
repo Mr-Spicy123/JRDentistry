@@ -1,5 +1,6 @@
 package Threads;
 
+import Misc.ImageGetter;
 import Misc.ImageIconScaler;
 import Misc.Plaque;
 
@@ -24,7 +25,7 @@ public class StarAnimation extends Thread{
     int height = label.getHeight();
     int x = label.getX();
     int y = label.getY();
-    ImageIcon temp = ImageGetter.getImage("star.png");
+    ImageIcon temp = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/star.png"), 290, 290);
     ImageIcon starImage = ImageIconScaler.scaleImageIcon(temp, 1, 1);
     JLabel starLabel = new JLabel(starImage);
     starLabel.setBounds(x, y, width, height);

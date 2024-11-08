@@ -31,8 +31,8 @@ public class ElimAnimation extends Thread{
       image = ImageIconScaler.scaleImageIcon(temp, image.getIconWidth() - 1, image.getIconHeight() - 1);
       label.setIcon(image);
       layeredFrame.repaint();
-      delay(5);
-      if (image.getIconWidth() <= 25) {
+      delay(1);
+      if (image.getIconWidth() <= 15) {
         layeredFrame.remove(label);
         p.alive = false;
         new StarAnimation(label, layeredFrame);

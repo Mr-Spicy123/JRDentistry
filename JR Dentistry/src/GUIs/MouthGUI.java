@@ -50,13 +50,13 @@ public class MouthGUI implements MouseMotionListener {
 
   //instance variables
   //final ImageIcon plaqueImage1 = new ImageIcon("JR Dentistry/out/Images/plaque1.png");
-  final ImageIcon plaqueImage1 = ImageGetter.getImage("plaque1.png");
-  final ImageIcon plaqueImage2 = ImageGetter.getImage("plaque2.png");
-  final ImageIcon plaqueImage3 = ImageGetter.getImage("plaque3.png");
-  final ImageIcon plaqueImage4 = ImageGetter.getImage("plaque4.png");
+  final ImageIcon plaqueImage1 = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/plaque1.png"), 399, 399);
+  final ImageIcon plaqueImage2 = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/plaque2.png"), 399, 399);
+  final ImageIcon plaqueImage3 = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/plaque3.png"), 399, 399);
+  final ImageIcon plaqueImage4 = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/plaque4.png"), 399, 399);
   final ImageIcon[] plaqueImagesArr = {plaqueImage1, plaqueImage2, plaqueImage3, plaqueImage4};
-  final ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(ImageGetter.getImage("e.png"), ScreenInfo.screenWidth, ScreenInfo.screenHeight);
-  final ImageIcon toolImage = ImageIconScaler.scaleImageIcon(ImageGetter.getImage("DentalTool.png"), 300, 300);
+  final ImageIcon mouthImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/e.png"), ScreenInfo.screenWidth, ScreenInfo.screenHeight);
+  final ImageIcon toolImage = ImageIconScaler.scaleImageIcon(new ImageIcon("JR Dentistry/out/Images/DentalTool.png"), 300, 300);
   int numTeeth;
   JFrame mainFrame;
   Plaque[] plaqueArr;
